@@ -1,16 +1,105 @@
-# React + Vite
+## EduTrack - Student Academic Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EduTrack is a full-stack Student Academic Management System developed using the MERN Stack. The application simplifies academic administration by providing dedicated dashboards for Admin, Teachers, and Students with secure role-based authentication.
 
-Currently, two official plugins are available:
+## FEATURES:-
+1.Admin
+Secure Login
+Dashboard Overview
+Add Student
+Update Student
+Delete Student
+Add Teacher
+Update Teacher
+Delete Teacher
+Manage Academic Years
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2.Teacher
+Teacher Login
+View Students
+Mark Attendance
+Create Assignments
+Assign Assignment to Entire Class
+Add Student Marks
 
-## React Compiler
+3.Student
+Student Login
+Dashboard
+View Attendance
+View Assignments
+View Marks
+Academic Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## TECH-STACK:-
+1.Frontend
+React.js
+Tailwind CSS
+Axios
+React Router
+
+2.Backend
+Node.js
+Express.js
+JWT Authentication
+bcrypt
+RBAC
+
+3.Database
+MongoDB Atlas
+Mongoose
+
+
+
+## PROJECT STRUCTURE:-
+EduTrack
+│
+├── backend
+│
+├── frontend
+│
+├── assets
+│
+└── README.md
+
+
+
+## SCREENSHOTS:-
+1.Home Page
+![Home](assets/home-page.png)
+
+2.Login Page
+![Login](assets/login-page.png)
+
+3.Signup Page
+![Home](assets/signup-page.png)
+
+4.Admin Dashboard
+![Admin](assets/admin-dashboard.png)
+
+5.Teacher Dashboard
+![Teacher](assets/teacher-dashboard.png)
+
+6.Student Dashboard
+![Student](assets/student-dashboard.png)
+
+
+
+## AUTHENTICATION:-
+JWT Authentication
+Cookie-based Login
+Protected Routes
+Role-based Authorization
+
+
+
+## FUTURE SCOPE:-
+Dynamic Attendance Analytics
+Student Performance Graphs
+PDF Report Generation
+Notifications
+Online Exams
+Leave Management
+Fee Payment Gateway
+Exam-Form Registration
