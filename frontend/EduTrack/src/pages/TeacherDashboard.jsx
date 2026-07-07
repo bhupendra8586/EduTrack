@@ -14,6 +14,7 @@ export default function TeacherDashboard() {
   });
 
   const [attendance, setAttendance] = useState({});
+  const [attendanceHistory, setAttendanceHistory] = useState({});
   const [marks, setMarks] = useState({});
 
 
@@ -36,14 +37,35 @@ export default function TeacherDashboard() {
     try {
       const res = await API.get("/teacher/students");
       setStudents(res.data.students);
+      res.data.students.forEach((student) => {
+  fetchAttendance(student._id);
+});
     } catch (err) {
       console.log(err);
     }
   };
 
+  const fetchAttendance = async (studentId) => {
+  try {
+    const res = await API.get(`/attendance/student/${studentId}`);
+
+    setAttendanceHistory((prev) => ({
+      ...prev,
+      [studentId]: res.data.attendance
+    }));
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+
   useEffect(() => {
-    fetchStudents();
-  }, []);
+  const load = async () => {
+    await fetchStudents();
+  };
+
+  load();
+}, []);
 
   const createAssignment = async () => {
     try {
@@ -61,7 +83,8 @@ export default function TeacherDashboard() {
         date: new Date(),
         status: attendance[studentId] || "present"
       });
-      alert("Attendance saved");
+      await fetchAttendance(studentId);
+alert("Attendance saved");
     } catch (err) {
       console.log(err);
     }
@@ -152,6 +175,41 @@ export default function TeacherDashboard() {
                     Save
                   </button>
                 </div>
+
+
+                {/* Attendance History */}
+<div className="mt-4 border-t border-gray-700 pt-3">
+  <h4 className="font-semibold text-blue-400 mb-2">
+    Attendance History
+  </h4>
+
+  {attendanceHistory[s._id]?.length > 0 ? (
+    attendanceHistory[s._id].map((a) => (
+      <div
+        key={a._id}
+        className="flex justify-between items-center py-1 text-sm border-b border-gray-800"
+      >
+        <span>
+          {new Date(a.date).toLocaleDateString()}
+        </span>
+
+        <span
+          className={`font-semibold ${
+            a.status === "present"
+              ? "text-green-400"
+              : "text-red-400"
+          }`}
+        >
+          {a.status.toUpperCase()}
+        </span>
+      </div>
+    ))
+  ) : (
+    <p className="text-gray-500 text-sm">
+      No attendance records found.
+    </p>
+  )}
+</div>
 
 
                 <div className="mt-3 flex gap-2 flex-wrap">

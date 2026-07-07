@@ -25,7 +25,7 @@ function ManageTeachers() {
         fetchTeachers();
     }, []);
 
-    
+
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:7878/admin/teachers/${id}`, {
@@ -109,7 +109,9 @@ function ManageTeachers() {
                                         {item.subject} - Sem {item.semester}
                                     </div>
                                 ))}</td>
-                                <td className="p-4">{teacher.year} Year</td>
+                                <td className="p-4">
+                                    {teacher.yearId?.name || "Not Assigned"}
+                                </td>
 
                                 <td className="p-4 flex gap-3">
 

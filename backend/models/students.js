@@ -32,6 +32,20 @@ const student_schema = new Schema({
     department: {
         type: String,
         required: true
+    },
+    fees: {
+        total: {
+            type: Number,
+            default: 0
+        },
+        paid: {
+            type: Number,
+            default: 0
+        },
+        due: {
+            type: Number,
+            default: 0
+        }
     }
 }, { timestamps: true });
 

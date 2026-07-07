@@ -13,6 +13,7 @@ const studentRoutes = require("./routes/studentRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
 const assignmentRoutes = require("./routes/assignmentRoutes");
 const marksRoutes = require("./routes/marksRoutes");
+const yearRoutes = require("./routes/yearRoutes");
 
 
 const app = express();
@@ -37,6 +38,7 @@ app.use("/student", studentRoutes);
 app.use("/attendance", attendanceRoutes);
 app.use("/assignment", assignmentRoutes);
 app.use("/marks", marksRoutes);
+app.use("/year", yearRoutes);
 
 
 app.get("/", (req, res) => {

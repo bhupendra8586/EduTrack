@@ -82,7 +82,7 @@ EduTrack
 ![Teacher](assets/teacher-dashboard.png)
 
 6.Student Dashboard
-![Student](assets/student-dashboard.png)
+![Student](assets/Student.png)
 
 
 

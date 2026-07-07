@@ -52,7 +52,6 @@ function ManageStudents() {
 
   return (
     <div className="min-h-screen bg-black text-white p-10">
-\
       <div className="flex justify-between items-center mb-8">
 
         <h1 className="text-3xl font-bold">
@@ -93,7 +92,8 @@ function ManageStudents() {
               <th className="p-4">Email</th>
               <th className="p-4">Department</th>
               <th className="p-4">Contact</th>
-              <th className="p-4">Attendance</th>
+              {/* <th className="p-4">Attendance</th> */}
+              <th className="p-4">Year</th>
               <th className="p-4">Fees</th>
               <th className="p-4">Actions</th>
             </tr>
@@ -114,7 +114,7 @@ function ManageStudents() {
                 <td className="p-4">{student.department}</td>
                 <td className="p-4">{student.contact}</td>
 
-                <td className="p-4">
+                {/* <td className="p-4">
 
                   {student.attendance?.map((a, index) => (
                     <div key={index}>
@@ -122,6 +122,10 @@ function ManageStudents() {
                     </div>
                   ))}
 
+                </td> */}
+
+                <td className="p-4">
+                  {student.yearId?.name}
                 </td>
 
                 <td className="p-4">

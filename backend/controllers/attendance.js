@@ -89,8 +89,28 @@ async function getStudentAttendance(req, res) {
   }
 }
 
+async function getAttendanceByStudent(req, res) {
+  try {
+    const { studentId } = req.params;
+
+    const attendance = await ATTENDANCE.find({ studentId })
+      .sort({ date: -1 });
+
+    res.status(200).json({
+      attendance
+    });
+
+  } catch (error) {
+    console.log("Error(getAttendanceByStudent):", error);
+    res.status(500).json({
+      message: "Server error"
+    });
+  }
+}
+
 module.exports = {
     markAttendance,
     updateAttendance,
-    getStudentAttendance
+    getStudentAttendance,
+    getAttendanceByStudent
 }

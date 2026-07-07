@@ -27,7 +27,7 @@ export default function StudentDashboard() {
 
   if (!data) return <h2 className="text-white p-10">Loading...</h2>;
 
-  const { student, assignments, marks } = data;
+  const { student, attendance, assignments, marks } = data;
 
   const previewAssignments = assignments.slice(0, 3);
   const previewMarks = marks.slice(0, 3);
@@ -35,15 +35,15 @@ export default function StudentDashboard() {
   return (
     <div className="bg-black text-white min-h-screen p-6">
       <button
-          onClick={handleLogout}
-          className="mt-6 mb-6 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg"
-        >
-          Logout
-        </button>
+        onClick={handleLogout}
+        className="mt-6 mb-6 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg"
+      >
+        Logout
+      </button>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        
+
         <div className="bg-gray-900 p-6 rounded-2xl">
           <h2 className="text-xl mb-4">Profile</h2>
           <p>Email: {student.email}</p>
@@ -93,18 +93,30 @@ export default function StudentDashboard() {
             <>
               <h2 className="text-xl mb-4">Attendance</h2>
 
-              {student.attendance?.map((a, i) => (
-                <div key={i} className="mb-3">
-                  <p>Sem {a.semester}</p>
-                  <div className="w-full bg-gray-700 h-2 rounded">
-                    <div
-                      className="bg-blue-500 h-2 rounded"
-                      style={{ width: `${a.percentage}%` }}
-                    ></div>
+              {attendance.length > 0 ? (
+                attendance.map((a) => (
+                  <div
+                    key={a._id}
+                    className="flex justify-between border-b border-gray-700 py-2"
+                  >
+                    <span>
+                      {new Date(a.date).toLocaleDateString()}
+                    </span>
+
+                    <span
+                      className={
+                        a.status === "present"
+                          ? "text-green-400"
+                          : "text-red-400"
+                      }
+                    >
+                      {a.status}
+                    </span>
                   </div>
-                  <p>{a.percentage}%</p>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>No attendance available</p>
+              )}
             </>
           )}
 

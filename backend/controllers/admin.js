@@ -16,54 +16,64 @@ async function addStudent(req, res) {
       department,
       year,
       fees
-    }= req.body;
+    } = req.body;
 
-  const existingUser = await USER.findOne({ email });
-  if (existingUser) {
-    return res.status(400).json({ msg: "Student already exists. " });
+    const yearDoc = await YEAR.findOne({
+      name: year,
+      department
+    });
+
+    if (!yearDoc) {
+      return res.status(400).json({
+        message: "Selected year not found"
+      });
+    }
+
+    const existingUser = await USER.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ msg: "Student already exists. " });
+    }
+
+    // create user with role = student
+    const user = await USER.create({
+      name,
+      email,
+      password,
+      address,
+      contact,
+      department,
+      year,
+      fees,
+      role: "student"
+    });
+
+    // create student profile
+    const student = await STUDENT.create({
+      userId: user._id,
+      yearId: yearDoc._id,
+      name,
+      email,
+      address,
+      contact,
+      department,
+      fees
+    });
+
+    res.status(201).json({
+      message: "Student created successfully",
+      user,
+      student
+    });
+
+  } catch (error) {
+    console.log("ERROR(addStudent):", error);
+
+    res.status(error.status || 500).json({
+      success: false,
+      message: error.message,
+      error,
+    });
   }
-
-  // create user with role = student
-  const user = await USER.create({
-    name,
-    email,
-    password,
-    address,
-    contact,
-    department,
-    year,
-    fees: {
-        total: 50000,
-        paid: 0,
-        due: 50000
-      },
-    role: "student"
-  });
-
-  // create student profile
-  const student = await STUDENT.create({
-    userId: user._id,
-    name,
-    email,
-    password,
-    address,
-    contact,
-    department,
-    year,
-    fees,
-    role: "student"
-  });
-
-  res.status(201).json({
-    message: "Student created successfully",
-    user,
-    student
-  });
-
-} catch (error) {
-  console.log(error);
-  res.status(500).json({ message: error.message });
-}
 }
 async function getAllStudents(req, res) {
   try {
@@ -152,9 +162,20 @@ async function addTeacher(req, res) {
       password,
       employeeId,
       department,
-      subjectAssigned,
-      yearId
+      year,
+      subjectAssigned
     } = req.body;
+
+    const yearDoc = await YEAR.findOne({
+      name: year,
+      department
+    });
+
+    if (!yearDoc) {
+      return res.status(400).json({
+        message: "Selected year not found"
+      });
+    }
 
     // check if user exists
     const existingUser = await USER.findOne({ email });
@@ -168,8 +189,8 @@ async function addTeacher(req, res) {
       email,
       password,
       department,
+      year,
       subjectAssigned,
-      yearId,
       role: "teacher"
     });
 
@@ -182,8 +203,7 @@ async function addTeacher(req, res) {
       password,
       department,
       subjectAssigned,
-      yearId,
-      role: "teacher"
+      yearId: yearDoc._id
     });
 
     res.status(201).json({
@@ -198,7 +218,8 @@ async function addTeacher(req, res) {
 async function getAllTeachers(req, res) {
   try {
     const teachers = await TEACHER.find()
-      .populate("userId", "name email role");
+      .populate("userId", "name email role")
+      .populate("yearId", "name department academicYear");
 
     res.status(200).json(teachers);
   } catch (error) {

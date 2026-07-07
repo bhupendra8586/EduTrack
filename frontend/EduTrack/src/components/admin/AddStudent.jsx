@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -14,17 +14,37 @@ function AddStudent() {
     address: "",
     contact: "",
     department: "",
+    year: "",
     semester: "",
     percentage: "",
     totalFees: "",
     paidFees: ""
   });
 
+  const [years, setYears] = useState([]);
+
   const handleChange = (e) => {
     setStudent({
       ...student,
       [e.target.name]: e.target.value
     });
+  };
+
+  useEffect(() => {
+    fetchYears();
+  }, []);
+
+  const fetchYears = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:7878/year",
+        { withCredentials: true }
+      );
+
+      setYears(res.data.years);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -39,6 +59,7 @@ function AddStudent() {
         address: student.address,
         contact: student.contact,
         department: student.department,
+        year: student.year,
         fees: {
           total: Number(student.totalFees),
           paid: Number(student.paidFees),
@@ -52,14 +73,14 @@ function AddStudent() {
         { withCredentials: true }
       );
       toast.success("Student Added Successfully");
-        
-      navigate("/admin/students");
-      
 
-      
+      navigate("/admin/students");
+
+
+
 
     } catch (error) {
-      console.log(error);
+      console.log(error.response?.data);
     }
   };
 
@@ -120,14 +141,45 @@ function AddStudent() {
           {/* Department */}
           <div>
             <label className="text-gray-300 text-sm">Department</label>
-            <input
-              type="text"
+            <select
               name="department"
-              placeholder="Department"
+              value={student.department}
               onChange={handleChange}
               required
               className="w-full mt-2 p-3 bg-black border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-orange-500"
-            />
+            >
+              <option value="">Select Department</option>
+              <option value="CS">CS</option>
+              <option value="CSE">CSE</option>
+              <option value="AIDS">AIDS</option>
+              <option value="IT">IT</option>
+              <option value="ENTC">ENTC</option>
+              <option value="EE">EE</option>
+              <option value="Mechanical">Mechanical</option>
+              <option value="Civil">Civil</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="text-gray-300 text-sm">Year</label>
+
+            <select
+              name="year"
+              value={student.year}
+              onChange={handleChange}
+              required
+              className="w-full mt-2 p-3 bg-black border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-orange-500"
+            >
+              <option value="">Select Year</option>
+
+              {years
+                .filter((y) => y.department === student.department)
+                .map((y) => (
+                  <option key={y._id} value={y.name}>
+                    {y.name}
+                  </option>
+                ))}
+            </select>
           </div>
 
           {/* Address */}
