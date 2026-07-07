@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "mini project, kdkce",
+  "description": "",
   "license": "ISC",
-  "author": "group no. 34",
+  "author": "",
   "type": "commonjs",
   "main": "server.js",
   "scripts": {

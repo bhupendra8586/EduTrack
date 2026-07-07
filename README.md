@@ -66,23 +66,23 @@ EduTrack
 
 
 ## SCREENSHOTS:-
-1.Home Page
+1. Home Page
 ![Home](assets/home-page.png)
 
-2.Login Page
+2. Login Page
 ![Login](assets/login-page.png)
 
-3.Signup Page
+3. Signup Page
 ![Home](assets/signup-page.png)
 
-4.Admin Dashboard
+4. Admin Dashboard
 ![Admin](assets/admin-dashboard.png)
 
-5.Teacher Dashboard
+5. Teacher Dashboard
 ![Teacher](assets/teacher-dashboard.png)
 
 6.Student Dashboard
-![Student](assets/Student.png)
+![Student](assets/student-dashboard.png)
 
 
 
@@ -90,9 +90,6 @@ EduTrack
 JWT Authentication
 Cookie-based Login
 Protected Routes
-Role-based Authorization
-
-
 
 ## FUTURE SCOPE:-
 Dynamic Attendance Analytics
