@@ -6,7 +6,7 @@ async function registerAdmin(req, res) {
     try {
         const { name, email, password } = req.body;
 
-        
+
         const existingUser = await USER.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: "Admin already exists" });
@@ -34,20 +34,20 @@ async function loginUser(req, res) {
     const { email, password, role } = req.body;
 
     try {
-        
+
         const user = await USER.findOne({ email });
 
-        if(!user){
+        if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        if(user.role !== role){
+        if (user.role !== role) {
             return res.status(401).json({
                 message: "Invalid role selected"
             });
         }
 
-        
+
 
         //password matching
         const match = await bcrypt.compare(password, user.password);
@@ -64,8 +64,9 @@ async function loginUser(req, res) {
         res.cookie("token", token,
             {
                 httpOnly: true,
-                secure: true,
-                sameSite: "none"
+                secure: process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+                maxAge: 7 * 24 * 60 * 60 * 1000
             }
         );
 

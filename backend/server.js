@@ -17,14 +17,16 @@ const yearRoutes = require("./routes/yearRoutes");
 
 
 const app = express();
-const port = 7878;
+const port = process.env.PORT || 7878;
+
+
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173", // frontend url
+    origin: process.env.CLIENT_URL, // frontend url
     credentials: true // allow cookies
 }));
 
