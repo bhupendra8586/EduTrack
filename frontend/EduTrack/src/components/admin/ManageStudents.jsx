@@ -13,7 +13,7 @@ function ManageStudents() {
     try {
 
       const res = await axios.get(
-        "http://localhost:7878/admin/students",
+        "https://edutrack-backend-vb35.onrender.com/admin/students",
         { withCredentials: true }
       );
 
@@ -32,7 +32,7 @@ function ManageStudents() {
     try {
 
       await axios.delete(
-        `http://localhost:7878/admin/students/${id}`,
+        `https://edutrack-backend-vb35.onrender.com/admin/students/${id}`,
         { withCredentials: true }
       );
 

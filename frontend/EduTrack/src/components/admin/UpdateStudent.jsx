@@ -27,7 +27,7 @@ function UpdateStudent() {
     try {
 
       const res = await axios.get(
-        `http://localhost:7878/admin/students/${id}`,
+        `https://edutrack-backend-vb35.onrender.com/admin/students/${id}`,
         { withCredentials: true }
       );
 
@@ -70,7 +70,7 @@ function UpdateStudent() {
       };
 
       await axios.put(
-        `http://localhost:7878/admin/students/${id}`, ////this is error
+        `https://edutrack-backend-vb35.onrender.com/admin/students/${id}`,
         updatedStudent,
         { withCredentials: true }
       );

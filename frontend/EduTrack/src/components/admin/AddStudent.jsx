@@ -37,7 +37,7 @@ function AddStudent() {
   const fetchYears = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:7878/year",
+        "https://edutrack-backend-vb35.onrender.com/year",
         { withCredentials: true }
       );
 
@@ -68,7 +68,7 @@ function AddStudent() {
       };
 
       await axios.post(
-        "http://localhost:7878/admin/students/add",
+        "https://edutrack-backend-vb35.onrender.com/admin/students/add",
         newStudent,
         { withCredentials: true }
       );

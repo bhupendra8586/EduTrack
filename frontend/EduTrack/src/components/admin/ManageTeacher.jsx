@@ -11,7 +11,7 @@ function ManageTeachers() {
     // Fetch teachers
     const fetchTeachers = async () => {
         try {
-            const res = await axios.get("http://localhost:7878/admin/teachers", {
+            const res = await axios.get("https://edutrack-backend-vb35.onrender.com/admin/teachers", {
                 withCredentials: true,
             });
 
@@ -28,7 +28,7 @@ function ManageTeachers() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:7878/admin/teachers/${id}`, {
+            await axios.delete(`https://edutrack-backend-vb35.onrender.com/admin/teachers/${id}`, {
                 withCredentials: true,
             });
 

@@ -58,7 +58,7 @@ function UpdateTeacher() {
     try {
 
       const res = await axios.get(
-        `http://localhost:7878/admin/teachers/${id}`,
+        `https://edutrack-backend-vb35.onrender.com/admin/teachers/${id}`,
         { withCredentials: true }
       );
 
@@ -88,7 +88,7 @@ function UpdateTeacher() {
     try {
 
       await axios.put(
-        `http://localhost:7878/admin/teachers/${id}`,
+        `https://edutrack-backend-vb35.onrender.com/admin/teachers/${id}`,
         teacher,
         { withCredentials: true }
       );
