@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
+// import axios from "axios";
+import API from "../api/api";
 
 const SigninPage = () => {
   const [name, setName] = useState("");
@@ -16,11 +17,9 @@ const SigninPage = () => {
     try {
       const user = { name, email, password };
 
-      const res = await axios.post(
-        "http://localhost:7878/auth/register-admin",
-        user,
-        { withCredentials: true }
-      );
+      const res = await API.post("/auth/register-admin", user, {
+        withCredentials: true
+      });
 
       console.log("RESPONSE:", res);
       toast.success("Account registration successful");

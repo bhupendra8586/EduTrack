@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
+// import axios from "axios";
+import API from "../api";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -16,11 +17,9 @@ const LoginPage = () => {
     try {
       const user = { email, password, role };
 
-      const res = await axios.post(
-        "http://localhost:7878/auth/login",
-        user,
-        { withCredentials: true }
-      );
+      const res = await API.post("/auth/login", user, {
+        withCredentials: true
+      });
 
       console.log("RESPONSE: ", res);
       console.log("ROLE: ", res.data.user.role);

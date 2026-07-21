@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import API from "../api";
 
 function AdminDashboard() {
 
@@ -12,15 +13,13 @@ function AdminDashboard() {
   const fetchCounts = async () => {
     try {
 
-      const students = await axios.get(
-        "http://localhost:7878/admin/students",
-        { withCredentials: true }
-      );
+      const students = await API.get("/admin/students", {
+        withCredentials: true
+      });
 
-      const teachers = await axios.get(
-        "http://localhost:7878/admin/teachers",
-        { withCredentials: true }
-      );
+      const teachers = await API.get("/admin/teachers", {
+        withCredentials: true
+      });
 
       setStudentsCount(students.data.length);
       setTeachersCount(teachers.data.length);
@@ -35,11 +34,9 @@ function AdminDashboard() {
   }, []);
 
   const handleLogout = async () => {
-    await axios.post(
-      "http://localhost:7878/auth/logout",
-      {},
-      { withCredentials: true }
-    );
+    await API.post("/auth/logout", {}, {
+      withCredentials: true
+    });
 
     navigate("/login");
   };
